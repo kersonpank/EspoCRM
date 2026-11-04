@@ -1,0 +1,67 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "name"
+                },
+                {
+                    "name": "account"
+                }
+            ],
+            [
+                {
+                    "name": "stage"
+                },
+                {
+                    "name": "amount"
+                }
+            ],
+            [
+                {
+                    "name": "probability"
+                },
+                {
+                    "name": "closeDate"
+                }
+            ],
+            [
+                {
+                    "name": "tipoFrete"
+                },
+                {
+                    "name": "cotacaoLogre"
+                }
+            ],
+            [
+                {
+                    "name": "origem"
+                },
+                {
+                    "name": "destino"
+                }
+            ],
+            [
+                {
+                    "name": "pesoKg"
+                },
+                {
+                    "name": "canalOrigem"
+                }
+            ],
+            [
+                {
+                    "name": "contacts"
+                },
+                {
+                    "name": "fonte"
+                }
+            ],
+            [
+                {
+                    "name": "description"
+                }
+            ]
+        ]
+    }
+]

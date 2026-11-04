@@ -1,0 +1,30 @@
+[
+    {
+        "link": true,
+        "name": "name"
+    },
+    {
+        "name": "account",
+        "width": 18
+    },
+    {
+        "name": "stage",
+        "width": 12
+    },
+    {
+        "name": "amount",
+        "width": 11
+    },
+    {
+        "name": "tipoFrete",
+        "width": 8
+    },
+    {
+        "name": "destino",
+        "width": 13
+    },
+    {
+        "name": "closeDate",
+        "width": 10
+    }
+]

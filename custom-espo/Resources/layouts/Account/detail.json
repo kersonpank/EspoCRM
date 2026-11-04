@@ -1,0 +1,149 @@
+[
+    {
+        "label": "Overview",
+        "rows": [
+            [
+                {
+                    "name": "name"
+                },
+                {
+                    "name": "website"
+                },
+                {
+                    "name": "sicCode"
+                }
+            ],
+            [
+                {
+                    "name": "billingAddress"
+                },
+                {
+                    "name": "shippingAddress"
+                }
+            ]
+        ],
+        "style": "default"
+    },
+    {
+        "customLabel": "Rede e relacionamento TSM",
+        "hidden": false,
+        "rows": [
+            [
+                {
+                    "name": "cnpj"
+                },
+                {
+                    "name": "cnpjRaiz"
+                },
+                {
+                    "name": "grupoEmpresarial"
+                }
+            ],
+            [
+                {
+                    "name": "papelRede"
+                },
+                {
+                    "name": "cicloVida"
+                },
+                {
+                    "name": "fonte"
+                }
+            ],
+            [
+                {
+                    "name": "ultimoToque"
+                },
+                {
+                    "name": "ultimoToqueCanal"
+                },
+                {
+                    "name": "confiancaCadastro"
+                }
+            ],
+            [
+                {
+                    "name": "proximaAcao"
+                },
+                {
+                    "name": "proximaAcaoEm"
+                }
+            ],
+            [
+                {
+                    "name": "canaisPermitidos"
+                },
+                {
+                    "name": "baseLegal"
+                }
+            ],
+            [
+                {
+                    "name": "naoContatar"
+                },
+                {
+                    "name": "naoContatarMotivo"
+                }
+            ]
+        ],
+        "style": "primary",
+        "tabBreak": false
+    },
+    {
+        "customLabel": "Info Contatos",
+        "dynamicLogicVisible": null,
+        "hidden": false,
+        "noteStyle": "info",
+        "noteText": null,
+        "rows": [
+            [
+                {
+                    "name": "emailAddress"
+                },
+                {
+                    "name": "phoneNumber"
+                }
+            ]
+        ],
+        "style": "default",
+        "tabBreak": false
+    },
+    {
+        "customLabel": "Capacidade (parceiros, transportadoras, agregados)",
+        "hidden": false,
+        "rows": [
+            [
+                {
+                    "name": "tiposVeiculo"
+                },
+                {
+                    "name": "regioesAtendidas"
+                },
+                {
+                    "name": "rntrc"
+                }
+            ]
+        ],
+        "style": "default",
+        "tabBreak": false
+    },
+    {
+        "label": "Details",
+        "rows": [
+            [
+                {
+                    "name": "type"
+                },
+                {
+                    "name": "industry"
+                }
+            ],
+            [
+                {
+                    "name": "description"
+                }
+            ]
+        ],
+        "style": "default"
+    }
+]

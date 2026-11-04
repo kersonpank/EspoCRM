@@ -1,0 +1,15 @@
+[
+    "stage",
+    "tipoFrete",
+    "fonte",
+    "cotacaoLogre",
+    "origem",
+    "destino",
+    "account",
+    "amount",
+    "closeDate",
+    "assignedUser",
+    "teams",
+    "createdAt",
+    "leadSource"
+]

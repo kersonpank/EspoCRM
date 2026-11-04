@@ -1,0 +1,30 @@
+[
+    {
+        "link": true,
+        "name": "name"
+    },
+    {
+        "name": "cnpj",
+        "width": 13
+    },
+    {
+        "name": "cicloVida",
+        "width": 11
+    },
+    {
+        "name": "papelRede",
+        "width": 16
+    },
+    {
+        "name": "phoneNumber",
+        "width": 13
+    },
+    {
+        "name": "ultimoToque",
+        "width": 12
+    },
+    {
+        "name": "billingAddressState",
+        "width": 8
+    }
+]

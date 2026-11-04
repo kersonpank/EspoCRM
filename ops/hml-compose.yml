@@ -1,0 +1,62 @@
+version: "3.8"
+
+# Homologação do EspoCRM 10 (cópia restaurada do backup de produção).
+# Sem Traefik, sem daemon (cron) e sem websocket: não recebe acesso externo,
+# não importa e-mail, não dispara jobs nem webhooks.
+
+services:
+  espocrm-db:
+    image: mariadb:11.4
+    command: --max-allowed-packet=64MB
+    environment:
+      MARIADB_ROOT_PASSWORD: "${DB_ROOT_PW}"
+      TZ: "America/Sao_Paulo"
+    volumes:
+      - hml_db:/var/lib/mysql
+    networks:
+      - hml_net
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  espocrm:
+    image: espocrm/espocrm:10.0.11
+    environment:
+      ESPOCRM_DATABASE_PLATFORM: "Mysql"
+      ESPOCRM_DATABASE_HOST: "espocrm-db"
+      ESPOCRM_DATABASE_PORT: "3306"
+      ESPOCRM_DATABASE_NAME: "espocrm"
+      ESPOCRM_DATABASE_USER: "espocrm"
+      ESPOCRM_DATABASE_PASSWORD: "${DB_PW}"
+      ESPOCRM_SITE_URL: "https://vendas.mesquitagrupo.com.br"
+      TZ: "America/Sao_Paulo"
+    volumes:
+      - hml_data:/var/www/html/data
+      - hml_custom:/var/www/html/custom
+      - hml_custom_client:/var/www/html/client/custom
+    networks:
+      - hml_net
+    deploy:
+      replicas: 0
+      restart_policy:
+        condition: on-failure
+
+volumes:
+  hml_db:
+    external: true
+    name: espocrm_hml_db
+  hml_data:
+    external: true
+    name: espocrm_hml_data
+  hml_custom:
+    external: true
+    name: espocrm_hml_custom
+  hml_custom_client:
+    external: true
+    name: espocrm_hml_custom_client
+
+networks:
+  hml_net:
+    driver: overlay
+    attachable: true

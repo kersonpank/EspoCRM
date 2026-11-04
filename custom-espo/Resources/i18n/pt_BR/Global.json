@@ -1,0 +1,8 @@
+{
+    "scopeNames": {
+        "Account": "Empresa"
+    },
+    "scopeNamesPlural": {
+        "Account": "Empresas"
+    }
+}

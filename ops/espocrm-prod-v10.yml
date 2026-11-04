@@ -1,0 +1,142 @@
+version: "3.8"
+
+# EspoCRM produção — layout do EspoCRM 10 (data, custom e client/custom em volumes próprios).
+# Versão FIXA: para atualizar, trocar a tag abaixo depois de fazer backup.
+# Senhas vêm do ambiente na hora do deploy (DB_ROOT_PW, DB_PW, ADMIN_PW); este arquivo não guarda segredos.
+
+x-espo-env: &espo-env
+  ESPOCRM_DATABASE_PLATFORM: "Mysql"
+  ESPOCRM_DATABASE_HOST: "espocrm-db"
+  ESPOCRM_DATABASE_PORT: "3306"
+  ESPOCRM_DATABASE_NAME: "espocrm"
+  ESPOCRM_DATABASE_USER: "espocrm"
+  ESPOCRM_DATABASE_PASSWORD: "${DB_PW}"
+  ESPOCRM_SITE_URL: "https://vendas.mesquitagrupo.com.br"
+  TZ: "America/Sao_Paulo"
+
+x-espo-volumes: &espo-volumes
+  - espo_data:/var/www/html/data
+  - espo_custom:/var/www/html/custom
+  - espo_custom_client:/var/www/html/client/custom
+
+x-deploy: &deploy
+  mode: replicated
+  replicas: 1
+  placement:
+    constraints:
+      - node.role == manager
+  restart_policy:
+    condition: on-failure
+
+services:
+  espocrm-db:
+    image: mariadb:11.4
+    command: --max-allowed-packet=64MB
+    environment:
+      MARIADB_ROOT_PASSWORD: "${DB_ROOT_PW}"
+      MARIADB_DATABASE: "espocrm"
+      MARIADB_USER: "espocrm"
+      MARIADB_PASSWORD: "${DB_PW}"
+      TZ: "America/Sao_Paulo"
+    volumes:
+      - espocrm_db:/var/lib/mysql
+    networks:
+      - espocrm_internal
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 20s
+      timeout: 10s
+      retries: 6
+      start_period: 20s
+    deploy: *deploy
+
+  espocrm:
+    image: espocrm/espocrm:10.0.11
+    environment:
+      <<: *espo-env
+      ESPOCRM_ADMIN_USERNAME: "admin"
+      ESPOCRM_ADMIN_PASSWORD: "${ADMIN_PW}"
+    volumes: *espo-volumes
+    networks:
+      - espocrm_internal
+      - traefik_public
+    deploy:
+      <<: *deploy
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=HiSuportTSM
+        - traefik.http.routers.espocrm.rule=Host(`vendas.mesquitagrupo.com.br`)
+        - traefik.http.routers.espocrm.entrypoints=websecure
+        - traefik.http.routers.espocrm.tls=true
+        - traefik.http.routers.espocrm.tls.certresolver=letsencryptresolver
+        - traefik.http.services.espocrm.loadbalancer.server.port=80
+        - traefik.http.middlewares.espocrm-sec.headers.browserXssFilter=true
+        - traefik.http.middlewares.espocrm-sec.headers.contentTypeNosniff=true
+        - traefik.http.middlewares.espocrm-sec.headers.frameDeny=true
+        - traefik.http.middlewares.espocrm-sec.headers.referrerPolicy=no-referrer
+        - traefik.http.middlewares.espocrm-sec.headers.sslRedirect=true
+        - traefik.http.middlewares.espocrm-sec.headers.stsSeconds=31536000
+        - traefik.http.middlewares.espocrm-sec.headers.stsIncludeSubdomains=true
+        - traefik.http.middlewares.espocrm-sec.headers.stsPreload=true
+        - traefik.http.routers.espocrm.middlewares=espocrm-sec
+
+  espocrm-daemon:
+    image: espocrm/espocrm:10.0.11
+    environment: *espo-env
+    volumes: *espo-volumes
+    networks:
+      - espocrm_internal
+    entrypoint: docker-daemon.sh
+    deploy:
+      <<: *deploy
+      restart_policy:
+        condition: any
+        delay: 10s
+
+  espocrm-websocket:
+    image: espocrm/espocrm:10.0.11
+    environment:
+      <<: *espo-env
+      ESPOCRM_CONFIG_USE_WEB_SOCKET: "true"
+      ESPOCRM_CONFIG_WEB_SOCKET_ZERO_M_Q_SUBSCRIBER_DSN: "tcp://*:7777"
+      ESPOCRM_CONFIG_WEB_SOCKET_ZERO_M_Q_SUBMISSION_DSN: "tcp://espocrm-websocket:7777"
+    volumes: *espo-volumes
+    networks:
+      - espocrm_internal
+      - traefik_public
+    entrypoint: docker-websocket.sh
+    deploy:
+      <<: *deploy
+      restart_policy:
+        condition: any
+        delay: 10s
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=HiSuportTSM
+        - traefik.http.routers.espocrm-ws.rule=Host(`vendas.mesquitagrupo.com.br`) && PathPrefix(`/ws`)
+        - traefik.http.routers.espocrm-ws.entrypoints=websecure
+        - traefik.http.routers.espocrm-ws.tls=true
+        - traefik.http.routers.espocrm-ws.tls.certresolver=letsencryptresolver
+        - traefik.http.services.espocrm-ws.loadbalancer.server.port=8080
+
+volumes:
+  espocrm_db:
+    external: true
+    name: espocrm_espocrm_db
+  espo_data:
+    external: true
+    name: espocrm_v10_data
+  espo_custom:
+    external: true
+    name: espocrm_v10_custom
+  espo_custom_client:
+    external: true
+    name: espocrm_v10_custom_client
+
+networks:
+  espocrm_internal:
+    external: true
+    name: espocrm_espocrm_internal
+  traefik_public:
+    external: true
+    name: HiSuportTSM

@@ -1,0 +1,132 @@
+[
+    {
+        "label": "",
+        "rows": [
+            [
+                {
+                    "name": "name"
+                },
+                {
+                    "name": "cCargo"
+                },
+                {
+                    "name": "accounts"
+                }
+            ],
+            [
+                {
+                    "name": "emailAddress"
+                },
+                {
+                    "name": "phoneNumber"
+                }
+            ],
+            [
+                {
+                    "name": "address"
+                }
+            ],
+            [
+                {
+                    "name": "description"
+                }
+            ]
+        ],
+        "style": "default"
+    },
+    {
+        "customLabel": "Rede e relacionamento TSM",
+        "hidden": false,
+        "rows": [
+            [
+                {
+                    "name": "papelRede"
+                },
+                {
+                    "name": "cicloVida"
+                },
+                {
+                    "name": "fonte"
+                }
+            ],
+            [
+                {
+                    "name": "ultimoToque"
+                },
+                {
+                    "name": "ultimoToqueCanal"
+                },
+                {
+                    "name": "whatsappJid"
+                }
+            ],
+            [
+                {
+                    "name": "proximaAcao"
+                },
+                {
+                    "name": "proximaAcaoEm"
+                }
+            ],
+            [
+                {
+                    "name": "canaisPermitidos"
+                },
+                {
+                    "name": "baseLegal"
+                }
+            ],
+            [
+                {
+                    "name": "naoContatar"
+                },
+                {
+                    "name": "naoContatarMotivo"
+                }
+            ]
+        ],
+        "style": "primary",
+        "tabBreak": false
+    },
+    {
+        "customLabel": "Capacidade (motorista / agregado)",
+        "hidden": false,
+        "rows": [
+            [
+                {
+                    "name": "cpf"
+                },
+                {
+                    "name": "rntrc"
+                }
+            ],
+            [
+                {
+                    "name": "tiposVeiculo"
+                },
+                {
+                    "name": "regioesAtendidas"
+                }
+            ]
+        ],
+        "style": "default",
+        "tabBreak": false
+    },
+    {
+        "customLabel": "Redes Sociais",
+        "dynamicLogicVisible": null,
+        "hidden": false,
+        "noteStyle": "info",
+        "noteText": null,
+        "rows": [
+            [
+                {
+                    "name": "cLinkedin"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "tabBreak": false
+    }
+]

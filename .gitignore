@@ -1,0 +1,6 @@
+extensao/tsm-core/tsm-core/
+*.zip
+.env
+*.sql
+*.sql.gz
+*.tgz

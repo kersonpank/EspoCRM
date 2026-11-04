@@ -1,0 +1,9 @@
+{
+    "labels": {
+        "Create Account": "Criar Empresa"
+    },
+    "fields": {
+        "cPalavrasChave": "Palavras Chave",
+        "cQntFuncionrios": "Qnt Funcionários"
+    }
+}

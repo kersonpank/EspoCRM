@@ -1,0 +1,14 @@
+{
+    "fields": {
+        "cCargo": {
+            "type": "text",
+            "rowsMin": 2,
+            "cutHeight": 200,
+            "isCustom": true
+        },
+        "cLinkedin": {
+            "type": "url",
+            "isCustom": true
+        }
+    }
+}

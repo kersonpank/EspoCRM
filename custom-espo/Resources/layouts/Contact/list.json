@@ -1,0 +1,32 @@
+[
+    {
+        "link": true,
+        "name": "name"
+    },
+    {
+        "name": "account",
+        "width": 22
+    },
+    {
+        "name": "cCargo",
+        "width": 13
+    },
+    {
+        "name": "phoneNumber",
+        "notSortable": true,
+        "width": 15
+    },
+    {
+        "name": "emailAddress",
+        "notSortable": true,
+        "width": 18
+    },
+    {
+        "name": "cicloVida",
+        "width": 11
+    },
+    {
+        "name": "ultimoToque",
+        "width": 12
+    }
+]
