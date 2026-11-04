@@ -44,8 +44,8 @@ Regras: identidade CNPJ (com zeros à esquerda recolocados) > telefone/e-mail do
 
 ## Backup
 - Servidor: cron 02h30 (`ops/backup-espocrm.sh`) → `/home/claude-ops/backups/espocrm/<data>` (dump completo + volumes v10), 7 dias.
-- Externo: n8n `GHcQZtEDQJkoVv5U` às 03h15 → Google Drive (Comercial TSM) `Backups TSM/EspoCRM`, retenção 7 diários + 8 semanais + 12 mensais (vai para a lixeira), alerta no grupo VENDAS se falhar.
+- Externo: n8n `GHcQZtEDQJkoVv5U` às 03h15 → Google Drive (Comercial TSM) `Backups TSM/EspoCRM`, pasta `1l898XcJzzmpFcLBdeVZVk5uZARk6sEIA`, retenção 7 diários + 8 semanais + 12 mensais (vai para a lixeira). Outros sistemas entram como irmãs dentro de `Backups TSM`, alerta no grupo VENDAS se falhar.
 
 ## Integrações
 - n8n `KDPu2lKimsyXaXgn` — Closer → Espo (a cada 2 min), grava via porta única.
-- Extensão oficial `ext-mcp` (servidor MCP dentro do Espo) para agentes lerem o CRM.
+- Extensão oficial `ext-mcp` **v0.3.0** instalada em 04/11/2026 (servidor MCP dentro do Espo, rota `POST /api/v1/Mcp/{slug}`). Zip em `/home/claude-ops/ext/terceiros/mcp-0.3.0.zip`, sha256 `140e34e24d541a648d531dd5456072abca77a890fc04c39381d704f883dd64dc`. Endpoints são criados em Administração → MCP (slug, ferramentas liberadas: Find/Read/Create/Update/Delete/RecordStream/CreatePost, usuários com acesso). Padrão TSM: agentes de monitoramento só com Find/Read; escrita só pela porta única.
